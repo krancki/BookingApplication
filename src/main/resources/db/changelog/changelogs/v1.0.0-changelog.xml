@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+
+
+    <changeSet id="initialization" author="krancki">
+        <createTable tableName="room">
+            <column type="BIGINT" name="id" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column type="SMALLINT" name="size"/>
+            <column type="NUMERIC" name="price"/>
+            <column type="VARCHAR" name="description"/>
+        </createTable>
+
+        <createTable tableName="reservation">
+            <column type="BIGINT" name="id" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column type="VARCHAR" name="nick_name"/>
+            <column type="DATE" name="booking_from"/>
+            <column type="DATE" name="booking_to"/>
+            <column type="TIMESTAMP" name="created_time"/>
+            <column type="BIGINT" name="room_id">
+                <constraints foreignKeyName="fk_reservation_room" references="room(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="notification">
+            <column type="BIGINT" name="id" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column type="VARCHAR" name="nick_name"/>
+            <column type="VARCHAR" name="subject"/>
+            <column type="VARCHAR" name="message"/>
+            <column type="TIMESTAMP" name="created_time"/>
+            <column type="BOOLEAN" name="read_by_user"/>
+            <column type="DATE" name="notification_delivery_date"/>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

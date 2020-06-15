@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  booking-app:
+    image: "booking-app-image"
+    ports:
+    - 8888:8888
+    environment:
+      DB_ADDR: postgres-database
+      DB_PORT: 5432
+      DB_DATABASE: "postgres"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+    depends_on:
+      - postgres-database
+  postgres-database:
+    image: "postgres"
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
